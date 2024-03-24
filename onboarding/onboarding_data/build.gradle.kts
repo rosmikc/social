@@ -12,4 +12,5 @@ android {
 dependencies {
     implementation(project(Modules.core))
     implementation(project(Modules.onboardingDomain))
+    implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
 }
