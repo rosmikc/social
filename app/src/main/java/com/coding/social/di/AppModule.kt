@@ -1,7 +1,7 @@
 package com.coding.social.di
 
-import com.coding.onboarding_data.service.AuthenticationServiceImpl
-import com.coding.onboarding_domain.service.AuthenticationService
+import com.coding.core.data.service.AuthenticationServiceImpl
+import com.coding.core.domain.service.AuthenticationService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

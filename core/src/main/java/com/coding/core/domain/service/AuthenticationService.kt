@@ -1,6 +1,6 @@
-package com.coding.onboarding_domain.service
+package com.coding.core.domain.service
 
-import com.coding.onboarding_domain.model.User
+import com.coding.core.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 interface AuthenticationService {

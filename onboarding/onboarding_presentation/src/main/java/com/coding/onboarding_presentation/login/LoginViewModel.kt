@@ -1,4 +1,4 @@
-package com.coding.onboarding_presentation.signup
+package com.coding.onboarding_presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,12 +10,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor(
+class LoginViewModel @Inject constructor(
     private val authenticationService: AuthenticationService
 ) : ViewModel() {
     val email = MutableStateFlow("")
     val password = MutableStateFlow("")
-    val confirmPassword = MutableStateFlow("")
 
     fun updateEmail(newEmail: String) {
         email.value = newEmail
@@ -25,17 +24,14 @@ class SignUpViewModel @Inject constructor(
         password.value = newPassword
     }
 
-    fun updateConfirmPassword(newConfirmPassword: String) {
-        confirmPassword.value = newConfirmPassword
+    fun onSignInClick(openAndPopUp: (String, String) -> Unit) {
+        viewModelScope.launch {
+            authenticationService.signIn(email.value, password.value)
+            openAndPopUp(Route.TIME_LINE, Route.LOGIN)
+        }
     }
 
     fun onSignUpClick(openAndPopUp: (String, String) -> Unit) {
-        viewModelScope.launch {
-            if (password.value != confirmPassword.value) {
-                throw Exception("Passwords do not match")
-            }
-            authenticationService.signUp(email.value, password.value)
-            openAndPopUp(Route.TIME_LINE, Route.SIGN_UP)
-        }
+        openAndPopUp(Route.SIGN_UP, Route.LOGIN)
     }
 }

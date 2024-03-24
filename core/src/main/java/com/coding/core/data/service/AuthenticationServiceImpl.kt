@@ -1,7 +1,7 @@
-package com.coding.onboarding_data.service
+package com.coding.core.data.service
 
-import com.coding.onboarding_domain.model.User
-import com.coding.onboarding_domain.service.AuthenticationService
+import com.coding.core.domain.model.User
+import com.coding.core.domain.service.AuthenticationService
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth

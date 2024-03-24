@@ -1,4 +1,4 @@
-package com.coding.onboarding_domain.model
+package com.coding.core.domain.model
 
 data class User(
     val id: String = ""

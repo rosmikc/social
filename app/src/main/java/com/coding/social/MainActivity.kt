@@ -15,7 +15,9 @@ import androidx.navigation.compose.rememberNavController
 import com.coding.core.navigation.Route
 import com.coding.onboarding_presentation.login.LoginScreen
 import com.coding.onboarding_presentation.signup.SignUpScreen
+import com.coding.onboarding_presentation.splashscreen.SplashScreen
 import com.coding.social.ui.theme.SocialTheme
+import com.coding.timeline.TimeLineScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,11 +38,11 @@ class MainActivity : ComponentActivity() {
                     NavHost(
                         navController = navController,
                         modifier = Modifier.padding(padding),
-                        startDestination = Route.SIGN_UP
+                        startDestination = Route.SPLASH_SCREEN
                     ) {
                         composable(Route.LOGIN) {
                             LoginScreen(
-//                                openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) }
+                                openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) }
                             )
                         }
 
@@ -51,8 +53,15 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(Route.SPLASH_SCREEN) {
-//                            SplashScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
+                            SplashScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
 //                        } )
+                        }
+
+                        composable(Route.TIME_LINE) {
+                            TimeLineScreen(
+                                restartApp = { route -> appState.clearAndNavigate(route) },
+                                openScreen = { route -> appState.navigate(route) }
+                            )
                         }
                     }
                 }
