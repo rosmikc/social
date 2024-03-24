@@ -17,6 +17,8 @@ dependencies {
     implementation(Retrofit.retrofit)
     implementation(Retrofit.moshiConverter)
     implementation(Retrofit.okHttpLoggingInterceptor)
+    implementation("com.google.firebase:firebase-common-ktx:20.4.3")
+    implementation("com.google.firebase:firebase-firestore")
 
     "kapt"(Room.roomCompiler)
     implementation(Room.roomKtx)

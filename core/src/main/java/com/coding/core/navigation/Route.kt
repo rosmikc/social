@@ -5,4 +5,5 @@ object Route {
     const val LOGIN = "login"
     const val SIGN_UP = "signup"
     const val TIME_LINE = "timeline"
+    const val CREATE_POST = "createpost"
 }

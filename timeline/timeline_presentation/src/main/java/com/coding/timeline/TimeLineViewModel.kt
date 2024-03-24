@@ -4,15 +4,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coding.core.domain.service.AuthenticationService
 import com.coding.core.navigation.Route
+import com.coding.timeline_domain.service.StoreService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TimeLineViewModel @Inject constructor(
-    private val authenticationService: AuthenticationService
+    private val authenticationService: AuthenticationService,
+    private val storeService: StoreService
 ): ViewModel() {
-//    val notes = storageService.notes
+    val posts = storeService.posts
 
     fun initialize(restartApp: (String) -> Unit) {
         viewModelScope.launch {
@@ -22,7 +24,7 @@ class TimeLineViewModel @Inject constructor(
         }
     }
     fun onAddClick(openScreen: (String) -> Unit) {
-//        openScreen("$NOTE_SCREEN?$NOTE_ID=$NOTE_DEFAULT_ID")
+        openScreen(Route.CREATE_POST)
     }
 
 //    fun onNoteClick(openScreen: (String) -> Unit, note: Note) {

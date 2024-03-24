@@ -16,6 +16,7 @@ import com.coding.core.navigation.Route
 import com.coding.onboarding_presentation.login.LoginScreen
 import com.coding.onboarding_presentation.signup.SignUpScreen
 import com.coding.onboarding_presentation.splashscreen.SplashScreen
+import com.coding.post.CreatePostScreen
 import com.coding.social.ui.theme.SocialTheme
 import com.coding.timeline.TimeLineScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,6 +62,12 @@ class MainActivity : ComponentActivity() {
                             TimeLineScreen(
                                 restartApp = { route -> appState.clearAndNavigate(route) },
                                 openScreen = { route -> appState.navigate(route) }
+                            )
+                        }
+
+                        composable(Route.CREATE_POST) {
+                            CreatePostScreen(
+                                popUpScreen = { appState.popUp() }
                             )
                         }
                     }

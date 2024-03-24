@@ -15,4 +15,6 @@
     <string name="delete_account_title">Delete account?</string>
     <string name="delete_account_description">You will lose all your notes and your account will be deleted. This action is irreversible.</string>
     <string name="cancel">Cancel</string>
+    <string name="new_post">New Post</string>
+    <string name="timeline_title">Latest Posts</string>
 </resources>

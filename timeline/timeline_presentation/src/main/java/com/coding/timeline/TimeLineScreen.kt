@@ -1,28 +1,42 @@
 package com.coding.timeline
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.coding.core.R
+import com.coding.timeline_domain.model.Post
+import kotlinx.coroutines.flow.toList
 
 @Composable
 fun TimeLineScreen(
@@ -33,6 +47,7 @@ fun TimeLineScreen(
 ) {
     LaunchedEffect(Unit) { viewModel.initialize(restartApp) }
 
+    val posts by viewModel.posts.collectAsState(emptyList())
     var showExitAppDialog by remember { mutableStateOf(false) }
     var showRemoveAccDialog by remember { mutableStateOf(false) }
 
@@ -40,11 +55,18 @@ fun TimeLineScreen(
         .fillMaxWidth()
         .fillMaxHeight()) {
         TopAppBar(
-            title = { Text(stringResource(R.string.app_name)) },
+            title = { Text(stringResource(R.string.timeline_title)) },
             actions = {
+                IconButton(onClick = { viewModel.onAddClick(openScreen) }) {
+                    Icon(
+                        Icons.Filled.Add,
+                        contentDescription = "Create Post"
+                    )
+                }
                 IconButton(onClick = { showExitAppDialog = true }) {
                     Icon(Icons.Filled.ExitToApp, "Exit app")
                 }
+
                 IconButton(onClick = { showRemoveAccDialog = true }) {
                     Icon(
                         Icons.Filled.Delete,
@@ -53,6 +75,19 @@ fun TimeLineScreen(
                 }
             }
         )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+        ) {
+            LazyColumn {
+                items(posts, key = { it.id }) { postItem ->
+                    PostItem(
+                        post = postItem
+                    )
+                }
+            }
+        }
 
         if (showExitAppDialog) {
             AlertDialog(
@@ -93,6 +128,28 @@ fun TimeLineScreen(
                     }
                 },
                 onDismissRequest = { showRemoveAccDialog = false }
+            )
+        }
+    }
+}
+
+@Composable
+fun PostItem(
+    post: Post
+) {
+    Card(
+        modifier = Modifier.padding(8.dp, 0.dp, 8.dp, 8.dp)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colors.background)
+        ) {
+            Text(
+                text = post.text,
+                modifier = Modifier.padding(12.dp, 12.dp, 12.dp, 12.dp),
+                style = MaterialTheme.typography.body1
             )
         }
     }
