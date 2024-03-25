@@ -162,14 +162,20 @@ fun PostItem(
         ) {
             Text(
                 text = post.timestamp.toDate().toString(),
-                modifier = Modifier.padding(12.dp, 12.dp, 12.dp, 5.dp),
+                modifier = Modifier.padding(2.dp, 12.dp, 12.dp, 2.dp),
                 style = MaterialTheme.typography.body2,
-                textAlign = TextAlign.End
+                textAlign = TextAlign.Start
+            )
+            Text(
+                text = "User: ${post.userId.substring(0,8)}",
+                modifier = Modifier.padding(2.dp, 2.dp, 12.dp, 2.dp),
+                style = MaterialTheme.typography.body2,
+                textAlign = TextAlign.Start
             )
             Text(
                 text = post.text,
                 modifier = Modifier.padding(12.dp, 12.dp, 12.dp, 5.dp),
-                style = MaterialTheme.typography.body1
+                style = MaterialTheme.typography.h6
             )
 
             if(post.imageUrl != null) {

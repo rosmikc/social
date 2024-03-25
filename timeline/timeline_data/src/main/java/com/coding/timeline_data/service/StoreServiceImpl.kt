@@ -30,6 +30,7 @@ class StoreServiceImpl @Inject constructor(
                 Firebase.firestore
                     .collection(POSTS_COLLECTION)
                     .orderBy("timestamp", Query.Direction.DESCENDING)
+                    .limit(30)
                     .dataObjects()
             }
 
