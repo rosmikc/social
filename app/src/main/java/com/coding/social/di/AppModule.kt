@@ -24,4 +24,5 @@ object AppModule {
     fun provideStoreService(authenticationService: AuthenticationService): StoreService {
         return StoreServiceImpl(authenticationService)
     }
+
 }
