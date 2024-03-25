@@ -43,6 +43,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
@@ -159,6 +160,12 @@ fun PostItem(
                 .fillMaxWidth()
                 .background(MaterialTheme.colors.background)
         ) {
+            Text(
+                text = post.timestamp.toDate().toString(),
+                modifier = Modifier.padding(12.dp, 12.dp, 12.dp, 5.dp),
+                style = MaterialTheme.typography.body2,
+                textAlign = TextAlign.End
+            )
             Text(
                 text = post.text,
                 modifier = Modifier.padding(12.dp, 12.dp, 12.dp, 5.dp),
