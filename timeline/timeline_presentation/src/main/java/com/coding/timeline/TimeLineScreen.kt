@@ -172,11 +172,14 @@ fun PostItem(
                 style = MaterialTheme.typography.body2,
                 textAlign = TextAlign.Start
             )
-            Text(
-                text = post.text,
-                modifier = Modifier.padding(12.dp, 12.dp, 12.dp, 5.dp),
-                style = MaterialTheme.typography.h6
-            )
+
+            if(post.text.isNotEmpty()) {
+                Text(
+                    text = post.text,
+                    modifier = Modifier.padding(12.dp, 12.dp, 12.dp, 5.dp),
+                    style = MaterialTheme.typography.h6
+                )
+            }
 
             if(post.imageUrl != null) {
                 displayImage(post)
