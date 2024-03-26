@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "368835882522",
+    "firebase_url": "https://socialmediaapp-28952-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "socialmediaapp-28952",
+    "storage_bucket": "socialmediaapp-28952.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368835882522:android:8046917f75116370436ba3",
+        "android_client_info": {
+          "package_name": "com.coding.social"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC2loRH-oiPKr-MTVVLO-BTwWBBnAdpZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
