@@ -1,11 +1,13 @@
 package com.coding.onboarding_presentation.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coding.core.navigation.Route
 import com.coding.core.domain.service.AuthenticationService
 import com.coding.onboarding_domain.use_case.PasswordStrengthValidator
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,10 +28,15 @@ class LoginViewModel @Inject constructor(
     }
 
     fun onSignInClick(openAndPopUp: (String, String) -> Unit) {
-        viewModelScope.launch {
-            authenticationService.signIn(email.value, password.value)
-            openAndPopUp(Route.TIME_LINE, Route.LOGIN)
-        }
+        viewModelScope.launch(
+            CoroutineExceptionHandler { _, throwable ->
+                Log.d("ERROR", throwable.message.orEmpty())
+            },
+            block = {
+                authenticationService.signIn(email.value, password.value)
+                openAndPopUp(Route.TIME_LINE, Route.LOGIN)
+            }
+        )
     }
 
     fun onSignUpClick(openAndPopUp: (String, String) -> Unit) {

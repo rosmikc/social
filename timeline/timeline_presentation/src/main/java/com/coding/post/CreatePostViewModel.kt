@@ -1,6 +1,7 @@
 package com.coding.post
 
 import android.net.Uri
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import com.google.firebase.Timestamp
+import kotlinx.coroutines.CoroutineExceptionHandler
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,9 +25,14 @@ class CreatePostViewModel @Inject constructor(
     val selectedImageUri = mutableStateOf<Uri?>(null)
 
     fun savePost(popUpScreen: () -> Unit) {
-        viewModelScope.launch {
-            storeService.createPost(post.value, selectedImageUri.value)
-        }
+        viewModelScope.launch(
+            CoroutineExceptionHandler { _, throwable ->
+                Log.d("ERROR", throwable.message.orEmpty())
+            },
+            block = {
+                storeService.createPost(post.value, selectedImageUri.value)
+            }
+        )
         popUpScreen()
     }
 
