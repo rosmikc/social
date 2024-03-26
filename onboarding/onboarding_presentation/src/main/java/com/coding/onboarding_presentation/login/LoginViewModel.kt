@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coding.core.navigation.Route
 import com.coding.core.domain.service.AuthenticationService
+import com.coding.onboarding_domain.use_case.PasswordStrengthValidator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
